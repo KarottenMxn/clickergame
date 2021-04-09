@@ -6,7 +6,6 @@ body {
 .screenSplitter {
     width: 50%;
     border-right: 2px solid black;
-    margin-bottom: 5000px;
 }
 
 .clickerCarrot {
@@ -19,4 +18,10 @@ body {
 }
 #counter {
     font-size: 60px;
+}
+
+.upgrades {
+    overflow-y: scroll;
+    height: 100px;
+    background-color: blueviolet;
 }
