@@ -9,13 +9,24 @@
     
 </head>
 <body>
-        <div id="counter">1</div>
-        <img src="Carrot_Updated.png" class="clickerCarrot" id="clicker" onclick="click()">
-        <button onclick="click()">CLICK</button>
+        <audio id="clickSound">
+          <source src="carrotClick.mp3">
+        </audio>
+
+        <div id="counter">Karotten: 0</div>
+        <div id="carrotClickAmount" class="carrotClickAmount">12</div>
+        <img src="Carrot_Updated.png" class="clickerCarrot" id="clicker" onclick="carrotClick()">
 
         <script>
-            function click() {
-              document.getElementById("counter").innerHTML = "jojo"
+          
+          var anzahlKarotten = 0;
+            function carrotClick() {
+              anzahlKarotten++;
+              document.getElementById("counter").innerHTML ="Karotten: " + anzahlKarotten
+              playSound(document.getElementById("clickSound"));
+            }
+            function playSound(sound) {
+              sound.play();
             }
         </script>
 </body>
