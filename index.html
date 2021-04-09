@@ -13,12 +13,14 @@
           <source src="carrotClick.mp3">
         </audio>
 
-        <div id="counter">Karotten: 0</div>
-        <div id="carrotClickAmount" class="carrotClickAmount">12</div>
-        <img src="Carrot_Updated.png" class="clickerCarrot" id="clicker" onclick="carrotClick()">
+        
+        <div class="screenSplitter">
+          <div id="counter">Karotten: 0</div>
+          <div id="carrotClickAmount" class="carrotClickAmount"></div>
+          <img src="Carrot_Updated.png" class="clickerCarrot" id="clicker" onclick="carrotClick()">
+        </div>
 
         <script>
-          
           var anzahlKarotten = 0;
             function carrotClick() {
               anzahlKarotten++;
