@@ -1,0 +1,12 @@
+.clickerCarrot {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 400px;
+    display: block;
+    width: 160px;
+    transition: width 0.05s ease-in-out ;
+}
+
+.clickerCarrot:active {
+    width: 150px;
+}
