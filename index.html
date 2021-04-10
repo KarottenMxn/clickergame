@@ -35,40 +35,42 @@
         </div>
         <button onclick="save()">Save</button>
         <button onclick="reset()">Reset</button>
-        <button onclick="load()">Load</button>
 
         
         <script>
-          var anzahlKarotten = 0;
+          var gesamtKarotten = 0;
           
           
           var clickAmount = 1;
           
-          var anzahlKarotten = 0;
           
+          var click = 0;
           
           var carrotFabricNumber = 0;
           var carrotFabricAmount = 5;
           
           var fieldNumber = 0; 
           var fieldAmount = 1;
+                    
           
-          var savedCarrots = localStorage.getItem("saveKarotten");
-          anzahlKarotten = anzahlKarotten + savedCarrots;
-          
+          var savedCarrotsStr = localStorage.getItem("saveGame");
+          var savedCarrots = Number(savedCarrotsStr)
+
+          gesamtKarotten = savedCarrots;
 
           setInterval(function(){ 
-            anzahlKarotten = anzahlKarotten + (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+            gesamtKarotten = gesamtKarotten + (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
           }, 1000); 
-
+          
           setInterval(function(){
-            document.getElementById("counter").innerHTML ="Karotten: " + anzahlKarotten;
-            document.getElementById("cps").innerHTML = "cps: " (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+            document.getElementById("counter").innerHTML = "Karotten: " + gesamtKarotten;
+            document.getElementById("cps").innerHTML = (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+            
           }, 50 );
            
 
             function carrotClick() {
-              anzahlKarotten++;
+              gesamtKarotten++;
               playSound(document.getElementById("clickSound"));
               
               
@@ -77,16 +79,16 @@
               sound.play();
             }
             function buyField() {
-              if (anzahlKarotten > 24) {
-                anzahlKarotten = anzahlKarotten - 25;
+              if (gesamtKarotten > 24) {
+                gesamtKarotten = gesamtKarotten - 25;
                 fieldNumber++;
                 document.getElementById("fieldNumber").innerHTML = "Owned: " + fieldNumber;
 
               }
             }
             function buyCarrotFabric() {
-              if (anzahlKarotten > 49) {
-                anzahlKarotten = anzahlKarotten - 50;
+              if (gesamtKarotten > 49) {
+                gesamtKarotten = gesamtKarotten - 50;
                 carrotFabricNumber++;
                 document.getElementById("carrotFabricNumber").innerHTML = "Owned: " + carrotFabricNumber
               }
@@ -109,14 +111,13 @@
               }
 
               function save() {
-                localStorage.setItem("saveKarotten", anzahlKarotten);
+                localStorage.setItem("saveGame", gesamtKarotten);
               }
               function reset() {
-                localStorage.removeItem("saveKarotten");
-              }
-              function load() {
-                
-                anzahlKarotten = savedCarrots;
+                gesamtKarotten = 0;
+                carrotFabricAmount = 0;
+                fieldNumber = 0;
+                save()
               }
 
 
