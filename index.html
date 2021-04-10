@@ -33,27 +33,37 @@
             <h2 id="carrotFabricNumber" class="upgradeNumber">Owned: 0</h2>
           </div>
         </div>
+        <button onclick="save()">Save</button>
+        <button onclick="reset()">Reset</button>
+        <button onclick="load()">Load</button>
+
         
         <script>
-          var clickAmount = 1;
-
           var anzahlKarotten = 0;
-
-
+          
+          
+          var clickAmount = 1;
+          
+          var anzahlKarotten = 0;
+          
+          
           var carrotFabricNumber = 0;
           var carrotFabricAmount = 5;
-
+          
           var fieldNumber = 0; 
           var fieldAmount = 1;
-
+          
+          var savedCarrots = localStorage.getItem("saveKarotten");
+          anzahlKarotten = anzahlKarotten + savedCarrots;
+          
 
           setInterval(function(){ 
             anzahlKarotten = anzahlKarotten + (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
-          }, 1000);
+          }, 1000); 
 
           setInterval(function(){
             document.getElementById("counter").innerHTML ="Karotten: " + anzahlKarotten;
-            document.getElementById("cps").innerHTML = (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+            document.getElementById("cps").innerHTML = "cps: " (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
           }, 50 );
            
 
@@ -96,6 +106,17 @@
               setTimeout(function(){ 
                 newElm.remove();
               }, 2000);
+              }
+
+              function save() {
+                localStorage.setItem("saveKarotten", anzahlKarotten);
+              }
+              function reset() {
+                localStorage.removeItem("saveKarotten");
+              }
+              function load() {
+                
+                anzahlKarotten = savedCarrots;
               }
 
 
