@@ -33,7 +33,6 @@
             <h2 id="carrotFabricNumber" class="upgradeNumber">Owned: 0</h2>
           </div>
         </div>
-        <button onclick="save()">Save</button>
         <button onclick="reset()">Reset</button>
 
         
@@ -53,18 +52,29 @@
           var fieldAmount = 1;
                     
           
-          var savedCarrotsStr = localStorage.getItem("saveGame");
+          var savedCarrotsStr = localStorage.getItem("saveCarrots");
           var savedCarrots = Number(savedCarrotsStr)
+          var savedFabricNumberStr = localStorage.getItem("saveFabricNumber");
+          var savedFabricNumber = Number(savedFabricNumberStr)
+          var savedFieldNumberStr = localStorage.getItem("saveFieldNumber");
+          var savedFieldNumber = Number(savedFieldNumberStr)
 
           gesamtKarotten = savedCarrots;
+          carrotFabricNumber = savedFabricNumber;
+          fieldNumber = savedFieldNumber;
+          
+
 
           setInterval(function(){ 
             gesamtKarotten = gesamtKarotten + (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+            save()
           }, 1000); 
           
           setInterval(function(){
             document.getElementById("counter").innerHTML = "Karotten: " + gesamtKarotten;
             document.getElementById("cps").innerHTML = (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+            document.getElementById("carrotFabricNumber").innerHTML = "Owned: " + carrotFabricNumber
+            document.getElementById("fieldNumber").innerHTML = "Owned: " + fieldNumber;
             
           }, 50 );
            
@@ -82,7 +92,7 @@
               if (gesamtKarotten > 24) {
                 gesamtKarotten = gesamtKarotten - 25;
                 fieldNumber++;
-                document.getElementById("fieldNumber").innerHTML = "Owned: " + fieldNumber;
+                
 
               }
             }
@@ -90,7 +100,6 @@
               if (gesamtKarotten > 49) {
                 gesamtKarotten = gesamtKarotten - 50;
                 carrotFabricNumber++;
-                document.getElementById("carrotFabricNumber").innerHTML = "Owned: " + carrotFabricNumber
               }
             }
             
@@ -111,13 +120,22 @@
               }
 
               function save() {
-                localStorage.setItem("saveGame", gesamtKarotten);
+                localStorage.setItem("saveCarrots", gesamtKarotten);
+                localStorage.setItem("saveFabricNumber", carrotFabricNumber);
+                localStorage.setItem("saveFieldNumber", fieldNumber);
+
+
               }
               function reset() {
-                gesamtKarotten = 0;
-                carrotFabricAmount = 0;
-                fieldNumber = 0;
+                standart()
                 save()
+              }
+              function standart() {
+                gesamtKarotten = 0;
+                carrotFabricNumber = 0;
+                carrotFabricAmount = 5;
+                fieldNumber = 0;
+                fieldAmount = 1;
               }
 
 
