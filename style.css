@@ -1,27 +1,73 @@
 body {
-    text-align: center;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
     font-family: sans-serif;
+    overflow: hidden;
 }
-
-.screenSplitter {
-    width: 50%;
-    border-right: 2px solid black;
-}
-
 .clickerCarrot {
-    margin-top: 350px;
-    width: 160px;
+    width: 200px;
     transition: width 0.05s ease-in-out;
+    
 }
 .clickerCarrot:active {
-    width: 150px;
+    width: 190px;
+}
+.carrotCase {
+    margin-top: 350px;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #counter {
+    text-align: center;
     font-size: 60px;
 }
-
-.upgrades {
+#cps {
+    text-align: center;
+}
+.upgradeList {
     overflow-y: scroll;
+    height: 800px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: 0;
+    display: block;
+}
+.upgrade {
+    width: auto;
     height: 100px;
-    background-color: blueviolet;
+    background-color:mediumpurple;
+}
+.upgrade:nth-child(even) {
+    background-color: rgb(129, 77, 233);
+}
+h2.upgradeName {
+    margin-left: 10px;
+    text-decoration: underline;
+    float: left;
+}
+h2.upgradeNumber {
+    text-decoration: none;
+    font-size: 20px;
+    text-align:center;
+    float: right;
+    padding-top: 8px;
+    padding-right: 20px;
+}
+
+.carrotCase p {
+    position: absolute;
+    /* transform: translate(+50%, -50%); */
+    animation-name: abzwitschern;
+    animation-duration: 4s;
+}
+
+
+@keyframes abzwitschern {
+    from { opacity: 1;}
+    to { opacity: 0; top: 250px}
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Karotten clicker</title>
     <link rel="stylesheet" href="style.css">
     
 </head>
@@ -14,58 +14,91 @@
         </audio>
 
         
-        <div class="screenSplitter">
+        <div style="float:left; margin:10px; width: 500px; height: 1000px;">
           <div id="counter">Karotten: 0</div>
+          <div id="cps">cps: 0</div>
+
           <div id="carrotClickAmount" class="carrotClickAmount"></div>
-          <img src="Carrot_Updated.png" class="clickerCarrot" id="clicker" onclick="carrotClick()">
+          <div class="carrotCase" id="case">
+            <img src="karotte.png" onclick="carrotClick()" draggable="false" class="clickerCarrot" id="clicker">
+          </div>
         </div>
-        <div class="upgrades">
-          <pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          </pre>
+        <div style="float:right; margin:10px" class="upgradeList">
+          <div class="upgrade" onclick="buyField()">
+            <h2 class="upgradeName">Feld</h2>
+            <h2 id="fieldNumber" class="upgradeNumber">Owned: 0</h2>
+          </div>
+          <div class="upgrade" onclick="buyCarrotFabric()">
+            <h2 class="upgradeName">Karotten Fabrik</h2>
+            <h2 id="carrotFabricNumber" class="upgradeNumber">Owned: 0</h2>
+          </div>
         </div>
-
+        
         <script>
+          var clickAmount = 1;
+
           var anzahlKarotten = 0;
+
+
+          var carrotFabricNumber = 0;
+          var carrotFabricAmount = 5;
+
+          var fieldNumber = 0; 
+          var fieldAmount = 1;
+
+
+          setInterval(function(){ 
+            anzahlKarotten = anzahlKarotten + (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+          }, 1000);
+
+          setInterval(function(){
+            document.getElementById("counter").innerHTML ="Karotten: " + anzahlKarotten;
+            document.getElementById("cps").innerHTML = (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
+          }, 50 );
+           
+
             function carrotClick() {
               anzahlKarotten++;
-              document.getElementById("counter").innerHTML ="Karotten: " + anzahlKarotten
               playSound(document.getElementById("clickSound"));
+              
+              
             }
             function playSound(sound) {
               sound.play();
             }
+            function buyField() {
+              if (anzahlKarotten > 24) {
+                anzahlKarotten = anzahlKarotten - 25;
+                fieldNumber++;
+                document.getElementById("fieldNumber").innerHTML = "Owned: " + fieldNumber;
+
+              }
+            }
+            function buyCarrotFabric() {
+              if (anzahlKarotten > 49) {
+                anzahlKarotten = anzahlKarotten - 50;
+                carrotFabricNumber++;
+                document.getElementById("carrotFabricNumber").innerHTML = "Owned: " + carrotFabricNumber
+              }
+            }
+            
+            document.getElementById("clicker").addEventListener("click", clickPos, false)
+            function clickPos(e) {
+              cursorX = e.pageX;
+              cursorY = e.pageY;
+              console.log(cursorX + "  " + cursorY)
+              var container = document.getElementById("case")
+              var newElm = document.createElement('p');
+              newElm.style = "left:" + cursorX + "px; top:" + cursorY + "px"
+              newElm.innerText = "+" + clickAmount;
+              container.appendChild(newElm);
+
+              setTimeout(function(){ 
+                newElm.remove();
+              }, 2000);
+              }
+
+
         </script>
 </body>
 </html>
