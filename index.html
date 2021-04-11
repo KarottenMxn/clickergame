@@ -56,25 +56,25 @@
           var fieldPrice = 50;
                     
           
-          /* var savedCarrotsStr = localStorage.getItem("saveCarrots");
-          var savedCarrots = Number(savedCarrotsStr)
-          var savedFabricNumberStr = localStorage.getItem("saveFabricNumber");
-          var savedFabricNumber = Number(savedFabricNumberStr)
-          var savedFieldNumberStr = localStorage.getItem("saveFieldNumber");
-          var savedFieldNumber = Number(savedFieldNumberStr) */
+         
           
 
           var savedItems = JSON.parse(localStorage.getItem("saves"));
           var savedCarrots = savedItems.carrots;
-          var savedCarrotFabricNumber = savedItems.carrotFabric[0];
-          var savedCarrotFabricPrice = savedItems.carrotFabric[2]
-          var savedFieldNumber = savedItems.field[0];
 
-          gesamtKarotten = savedCarrots;
+          var savedCarrotFabricNumber = savedItems.carrotFabric[0];
+          var savedCarrotFabricPrice = savedItems.carrotFabric[2];
+
+          var savedFieldNumber = savedItems.field[0];
+          var savedFieldPrice = savedItems.field[2];
+
+          gesamtKarotten = Number(savedCarrots);
 
           carrotFabricNumber = savedCarrotFabricNumber;
-          carrotFabricPrice = savedCarrotFabricPrice
+          carrotFabricPrice = savedCarrotFabricPrice;
+
           fieldNumber = savedFieldNumber;
+          fieldPrice = savedFieldPrice;
           
 
 
@@ -91,7 +91,7 @@
 
             document.getElementById("fieldNumber").innerHTML = "Owned: " + fieldNumber;
             
-          }, 500 );
+          }, 100 );
            
 
             function carrotClick() {
@@ -116,8 +116,8 @@
             function buyCarrotFabric() {
               if (gesamtKarotten > (carrotFabricPrice - 1)) {
                 gesamtKarotten = gesamtKarotten - carrotFabricPrice;
-                let viertel1 = carrotFabricPrice / 4
-                carrotFabricPrice = carrotFabricPrice + Math.floor(viertel1)
+                let viertel = carrotFabricPrice / 4
+                carrotFabricPrice = carrotFabricPrice + Math.floor(viertel)
                 carrotFabricNumber++;
               }
             }
@@ -159,10 +159,10 @@
               function standart() {
                 gesamtKarotten = 0;
                 carrotFabricNumber = 0;
-                carrotFabricAmount = 5;
                 carrotFabricPrice = 100;
                 fieldNumber = 0;
-                fieldAmount = 1;
+                
+                
               }
 
 
