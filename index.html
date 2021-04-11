@@ -56,7 +56,9 @@
           var fieldPrice = 50;
                     
           
-         
+         if (localStorage.getItem("saves") == null) {
+           save()
+         }
           
 
           var savedItems = JSON.parse(localStorage.getItem("saves"));
@@ -68,7 +70,7 @@
           var savedFieldNumber = savedItems.field[0];
           var savedFieldPrice = savedItems.field[2];
 
-          gesamtKarotten = Number(savedCarrots);
+          gesamtKarotten = savedCarrots;
 
           carrotFabricNumber = savedCarrotFabricNumber;
           carrotFabricPrice = savedCarrotFabricPrice;
@@ -161,6 +163,7 @@
                 carrotFabricNumber = 0;
                 carrotFabricPrice = 100;
                 fieldNumber = 0;
+                fieldPrice = 50;
                 
                 
               }
