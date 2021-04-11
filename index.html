@@ -27,6 +27,7 @@
           <div class="upgrade" onclick="buyField()">
             <h2 class="upgradeName">Feld</h2>
             <h2 id="fieldNumber" class="upgradeNumber">Owned: 0</h2>
+            <h2 id="fieldPrice" class="upgradeNumber"></h2>
           </div>
           <div class="upgrade" onclick="buyCarrotFabric()">
             <h2 class="upgradeName">Karotten Fabrik</h2>
@@ -49,7 +50,7 @@
           
           var carrotFabricNumber = 0;
           var carrotFabricAmount = 5;
-          var carrotFabricPrice = 100;
+          var carrotFabricPrice = 1000;
           
           var fieldNumber = 0; 
           var fieldAmount = 1;
@@ -90,6 +91,7 @@
             document.getElementById("cps").innerHTML = (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
             document.getElementById("carrotFabricNumber").innerHTML = "Owned: " + carrotFabricNumber
             document.getElementById("carrotFabricPrice").innerHTML = "" + carrotFabricPrice
+            document.getElementById("fieldPrice").innerHTML = "" + fieldPrice
 
             document.getElementById("fieldNumber").innerHTML = "Owned: " + fieldNumber;
             
@@ -111,8 +113,6 @@
                 let viertel = fieldPrice / 4;
                 fieldPrice = fieldPrice + Math.floor(viertel);
                 fieldNumber++;
-                
-
               }
             }
             function buyCarrotFabric() {
@@ -161,7 +161,7 @@
               function standart() {
                 gesamtKarotten = 0;
                 carrotFabricNumber = 0;
-                carrotFabricPrice = 100;
+                carrotFabricPrice = 1000;
                 fieldNumber = 0;
                 fieldPrice = 50;
                 
