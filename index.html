@@ -31,6 +31,8 @@
           <div class="upgrade" onclick="buyCarrotFabric()">
             <h2 class="upgradeName">Karotten Fabrik</h2>
             <h2 id="carrotFabricNumber" class="upgradeNumber">Owned: 0</h2>
+            <h2 id="carrotFabricPrice" class="upgradeNumber"></h2>
+
           </div>
         </div>
         <button onclick="reset()">Reset</button>
@@ -47,20 +49,31 @@
           
           var carrotFabricNumber = 0;
           var carrotFabricAmount = 5;
+          var carrotFabricPrice = 100;
           
           var fieldNumber = 0; 
           var fieldAmount = 1;
+          var fieldPrice = 50;
                     
           
-          var savedCarrotsStr = localStorage.getItem("saveCarrots");
+          /* var savedCarrotsStr = localStorage.getItem("saveCarrots");
           var savedCarrots = Number(savedCarrotsStr)
           var savedFabricNumberStr = localStorage.getItem("saveFabricNumber");
           var savedFabricNumber = Number(savedFabricNumberStr)
           var savedFieldNumberStr = localStorage.getItem("saveFieldNumber");
-          var savedFieldNumber = Number(savedFieldNumberStr)
+          var savedFieldNumber = Number(savedFieldNumberStr) */
+          
+
+          var savedItems = JSON.parse(localStorage.getItem("saves"));
+          var savedCarrots = savedItems.carrots;
+          var savedCarrotFabricNumber = savedItems.carrotFabric[0];
+          var savedCarrotFabricPrice = savedItems.carrotFabric[2]
+          var savedFieldNumber = savedItems.field[0];
 
           gesamtKarotten = savedCarrots;
-          carrotFabricNumber = savedFabricNumber;
+
+          carrotFabricNumber = savedCarrotFabricNumber;
+          carrotFabricPrice = savedCarrotFabricPrice
           fieldNumber = savedFieldNumber;
           
 
@@ -74,9 +87,11 @@
             document.getElementById("counter").innerHTML = "Karotten: " + gesamtKarotten;
             document.getElementById("cps").innerHTML = (carrotFabricNumber * carrotFabricAmount) + (fieldNumber * fieldAmount);
             document.getElementById("carrotFabricNumber").innerHTML = "Owned: " + carrotFabricNumber
+            document.getElementById("carrotFabricPrice").innerHTML = "" + carrotFabricPrice
+
             document.getElementById("fieldNumber").innerHTML = "Owned: " + fieldNumber;
             
-          }, 50 );
+          }, 500 );
            
 
             function carrotClick() {
@@ -89,16 +104,20 @@
               sound.play();
             }
             function buyField() {
-              if (gesamtKarotten > 24) {
-                gesamtKarotten = gesamtKarotten - 25;
+              if (gesamtKarotten > fieldPrice - 1) {
+                gesamtKarotten = gesamtKarotten - fieldPrice;
+                let viertel = fieldPrice / 4;
+                fieldPrice = fieldPrice + Math.floor(viertel);
                 fieldNumber++;
                 
 
               }
             }
             function buyCarrotFabric() {
-              if (gesamtKarotten > 49) {
-                gesamtKarotten = gesamtKarotten - 50;
+              if (gesamtKarotten > (carrotFabricPrice - 1)) {
+                gesamtKarotten = gesamtKarotten - carrotFabricPrice;
+                let viertel1 = carrotFabricPrice / 4
+                carrotFabricPrice = carrotFabricPrice + Math.floor(viertel1)
                 carrotFabricNumber++;
               }
             }
@@ -120,9 +139,16 @@
               }
 
               function save() {
-                localStorage.setItem("saveCarrots", gesamtKarotten);
+                var saves = {
+                  carrots: gesamtKarotten,
+                  carrotFabric: [carrotFabricNumber, carrotFabricAmount, carrotFabricPrice],
+                  field: [fieldNumber, fieldAmount, fieldPrice]
+                }
+                
+                localStorage.setItem("saves", JSON.stringify(saves))
+                /* localStorage.setItem("saveCarrots", gesamtKarotten);
                 localStorage.setItem("saveFabricNumber", carrotFabricNumber);
-                localStorage.setItem("saveFieldNumber", fieldNumber);
+                localStorage.setItem("saveFieldNumber", fieldNumber); */
 
 
               }
@@ -134,6 +160,7 @@
                 gesamtKarotten = 0;
                 carrotFabricNumber = 0;
                 carrotFabricAmount = 5;
+                carrotFabricPrice = 100;
                 fieldNumber = 0;
                 fieldAmount = 1;
               }
